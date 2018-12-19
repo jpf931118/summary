@@ -1,4 +1,6 @@
 package com.jipf.app.service;
 
-public class UserService {
+public interface UserService {
+
+    public void print(String str);
 }
