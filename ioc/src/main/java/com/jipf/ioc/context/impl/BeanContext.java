@@ -10,12 +10,14 @@ public class BeanContext extends AbsBeanContext {
 
     public BeanContext(String properties){
         /* 加载资源文件**/
-        loadProperties(properties);
+        this.loadProperties(properties);
         /* 扫描class包**/
-        scanPackage(this.scan_package);
+        this.scanPackage(this.scan_package);
         /* 初始化ioc容器**/
-        initIoc();
+        this.initIoc();
         /* bean注入**/
-        injection();
+        this.injection();
+        /* aop功能处理**/
+        this.doAop();
     }
 }

@@ -1,5 +1,6 @@
 package com.jipf.ioc.context;
 
+import com.jipf.aop.AopBeanContext;
 import com.jipf.ioc.annotation.JAutowired;
 import com.jipf.ioc.annotation.JComponent;
 import com.jipf.ioc.annotation.JController;
@@ -109,6 +110,13 @@ public abstract class AbsBeanContext implements IBeanContext {
             }
         } catch (IllegalAccessException e) {
             throw new InitBeanContextException(e);
+        }
+    }
+
+    protected void doAop(){
+        String open = this.resourceBundle.getString(IOCConst.AOP_OPEN);
+        if (Boolean.valueOf(open)){//开启aop功能
+            AopBeanContext.createProxyBeanContext(this.beans);
         }
     }
 

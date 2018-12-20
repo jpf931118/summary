@@ -17,17 +17,15 @@ public class AopBeanContext {
      *
      * @return
      */
-    public Map<String, Object> createProxyBeanContext(Map<String, Object> iocBeans) {
+    public static void createProxyBeanContext(Map<String, Object> iocBeans) {
 
         IAspectHandler iAspectHandler = new AspectHandler(iocBeans);
 
         /* 处理需要代理的类 生成代理实例替换原始对象**/
-        this.doProxy(iocBeans, iAspectHandler);
-
-        return iocBeans;
+        doProxy(iocBeans, iAspectHandler);
     }
 
-    private void doProxy(Map<String, Object> iocBeans, IAspectHandler iAspectHandler) {
+    private static void doProxy(Map<String, Object> iocBeans, IAspectHandler iAspectHandler) {
         Iterator<Map.Entry<String, Object>> iterator = iocBeans.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry<String, Object> entry = iterator.next();
