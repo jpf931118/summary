@@ -36,7 +36,7 @@ public abstract class AbsAspectHandler implements IAspectHandler{
         aspectBeans.stream().forEach(aspect -> {
             Class<?> clazz = aspect.getClass();
             this.checkIAspect(clazz);
-            Method[] methods = clazz.getMethods();
+            Method[] methods = clazz.getDeclaredMethods();
             for (Method method : methods) {
                 if (method.isAnnotationPresent(JPointcut.class)) {
                     JPointcut jPointcut = method.getAnnotation(JPointcut.class);

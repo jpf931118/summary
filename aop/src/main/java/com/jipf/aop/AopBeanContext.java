@@ -31,11 +31,12 @@ public class AopBeanContext {
             Map.Entry<String, Object> entry = iterator.next();
             Class<?> clazz = entry.getValue().getClass();
             boolean status = false;
-            for (Method method : clazz.getMethods()) {
-                for (Annotation annotation : method.getAnnotations()) {
-                    Class<?> cl = annotation.getClass();
+            for (Method method : clazz.getDeclaredMethods()) {
+                for (Annotation annotation : method.getDeclaredAnnotations()) {
+                    Class<?> cl = annotation.annotationType();
                     if (iAspectHandler.getAspectInstance(cl.getCanonicalName()) != null) {//需要生成代理类
                         status = true;
+                        break;
                     }
                 }
             }

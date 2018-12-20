@@ -15,9 +15,9 @@ public class BeanContext extends AbsBeanContext {
         this.scanPackage(this.scan_package);
         /* 初始化ioc容器**/
         this.initIoc();
-        /* bean注入**/
-        this.injection();
         /* aop功能处理**/
         this.doAop();
+        /* bean注入**/
+        this.injection();
     }
 }

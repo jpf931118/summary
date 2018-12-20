@@ -13,6 +13,5 @@ public class AspectHandler extends AbsAspectHandler {
         List<Object> aspectBeans = this.filterAspect(iocBeans);
         /* 解析切面类**/
         this.parseAspect(aspectBeans);
-
     }
 }

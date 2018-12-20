@@ -26,30 +26,30 @@ public abstract class AbsBeanInvocationHandler implements InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) {
 
-        /* 获取该方法切点对应的切面实例**/
-        List<Object> instances = this.getAspectInstances(method.getAnnotations());
-
-        /* 前置处理**/
-        this.execAspectInstance("before",instances);
-
-        Object result = null;
         try {
-            result = method.invoke(this.target, args);
-        } catch (IllegalAccessException | InvocationTargetException e) {
+            /* 获取该方法切点对应的切面实例**/
+            Method m = this.target.getClass().getDeclaredMethod(method.getName(), method.getParameterTypes());
+
+            List<Object> instances = this.getAspectInstances(m.getAnnotations());
+
+            /* 前置处理**/
+            this.execAspectInstance("before", instances);
+
+            Object result = result = method.invoke(this.target, args);
+
+            /* 后置处理**/
+            this.execAspectInstance("after", instances);
+
+            return result;
+        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             throw new AspectHandlerException("proxy invoke method exception!");
         }
-
-        /* 后置处理**/
-        this.execAspectInstance("after",instances);
-
-
-        return result;
     }
 
     private List<Object> getAspectInstances(Annotation[] annotations) {
         List<Object> instances = new ArrayList<>();
-        for (Annotation annotation : annotations){
-            Class<?> clazz = annotation.getClass();
+        for (Annotation annotation : annotations) {
+            Class<?> clazz = annotation.annotationType();
             Object instance = this.iAspectHandler.getAspectInstance(clazz.getCanonicalName());
             if (instance != null) {
                 instances.add(instance);
@@ -60,13 +60,14 @@ public abstract class AbsBeanInvocationHandler implements InvocationHandler {
 
     /**
      * 执行切面实例方法
+     *
      * @param cmd
      * @param instances
      */
-    private void execAspectInstance(String cmd,List<Object> instances){
-        instances.stream().forEach(instance->{
-            IAspect iAspect = (IAspect)instance;
-            switch (cmd){
+    private void execAspectInstance(String cmd, List<Object> instances) {
+        instances.stream().forEach(instance -> {
+            IAspect iAspect = (IAspect) instance;
+            switch (cmd) {
                 case "before":
                     iAspect.before();
                     break;

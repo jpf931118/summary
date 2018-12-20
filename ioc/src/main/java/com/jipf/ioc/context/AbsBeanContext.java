@@ -91,7 +91,7 @@ public abstract class AbsBeanContext implements IBeanContext {
 
     protected void injection() {
         try {
-            Iterator<Map.Entry<String, Object>> iterator = beans.entrySet().iterator();
+            Iterator<Map.Entry<String, Object>> iterator = this.beans.entrySet().iterator();
             while (iterator.hasNext()) {
                 Map.Entry<String, Object> entry = iterator.next();
                 Field[] fields = entry.getValue().getClass().getDeclaredFields();
