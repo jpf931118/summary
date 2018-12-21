@@ -9,10 +9,10 @@ public interface IAspect {
     /**
      * 前置执行
      */
-    public void before();
+    public void before(String s);
 
     /**
      * 后置执行
      */
-    public void after();
+    public void after(String s);
 }

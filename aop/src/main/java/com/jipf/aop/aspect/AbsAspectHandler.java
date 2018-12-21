@@ -65,7 +65,7 @@ public abstract class AbsAspectHandler implements IAspectHandler{
             }
         }
         if (!status) {
-            throw new AspectHandlerException("IAspect not implements!");
+            throw new AspectHandlerException(clazz.getCanonicalName() + " not implements IAspect !");
         }
     }
 }
