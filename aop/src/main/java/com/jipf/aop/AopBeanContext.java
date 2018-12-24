@@ -43,7 +43,7 @@ public class AopBeanContext {
             if (status) {//需要生成代理类
                 Class<?>[] classes = clazz.getInterfaces();
                 if (classes.length == 0) {
-                    throw new AspectHandlerException("proxy instance must be implements interface");
+                    throw new AspectHandlerException(clazz.getCanonicalName() + " proxy instance must be implements interface");
                 }
                 Object proxy = ProxyBeanFactory.newProxyBean(entry.getValue(), iAspectHandler, classes);
                 iocBeans.put(entry.getKey(), proxy);
