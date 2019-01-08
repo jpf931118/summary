@@ -4,9 +4,9 @@ import com.jipf.aop.annotation.JAspect;
 import com.jipf.aop.annotation.JPointcut;
 import com.jipf.aop.core.IAspect;
 import com.jipf.app.common.annotation.Log;
-import com.jipf.core.common.log.LoggerFactory;
-import com.jipf.core.common.log.impl.Logger;
 import com.jipf.ioc.annotation.JComponent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @JAspect
 @JComponent
