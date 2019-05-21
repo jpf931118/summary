@@ -35,12 +35,12 @@ public abstract class AbsBeanInvocationHandler implements InvocationHandler {
             String info = "Class:" + this.target.getClass().getCanonicalName() + " Method:" + method.getName();
 
             /* 前置处理**/
-            this.execAspectInstance("before", instances,info);
+            this.execAspectInstance("before", instances, info);
 
-            Object result = result = method.invoke(this.target, args);
+            Object result = method.invoke(this.target, args);
 
             /* 后置处理**/
-            this.execAspectInstance("after", instances,info);
+            this.execAspectInstance("after", instances, info);
 
             return result;
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
@@ -66,7 +66,7 @@ public abstract class AbsBeanInvocationHandler implements InvocationHandler {
      * @param cmd
      * @param instances
      */
-    private void execAspectInstance(String cmd, List<Object> instances,String info) {
+    private void execAspectInstance(String cmd, List<Object> instances, String info) {
         instances.stream().forEach(instance -> {
             IAspect iAspect = (IAspect) instance;
             switch (cmd) {
