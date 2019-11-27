@@ -3,5 +3,86 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="school" class="com.jipf.springframeworkuse.beans.School"></bean>
+    <bean id="school" class="com.jipf.springframeworkuse.beans.School">
+        <constructor-arg name="name_1">
+            <value>my school</value>
+        </constructor-arg>
+        <meta key="aaa" value="bbb"></meta>
+    </bean>
+
+    <bean id="school_1" class="com.jipf.springframeworkuse.beans.School">
+        <constructor-arg type="java.lang.String">
+            <value>my school</value>
+        </constructor-arg>
+        <constructor-arg type="java.lang.String">
+            <value>tong zhou</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="school_2" class="com.jipf.springframeworkuse.beans.School">
+        <constructor-arg type="java.lang.String">
+            <value>my school</value>
+        </constructor-arg>
+        <constructor-arg type="java.lang.Integer">
+            <value>3</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="school_3" class="com.jipf.springframeworkuse.beans.School">
+        <constructor-arg index="0">
+            <value>my school</value>
+        </constructor-arg>
+        <constructor-arg index="1">
+            <value>12</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="school_4" class="com.jipf.springframeworkuse.beans.School">
+        <constructor-arg index="0">
+            <value>my school</value>
+        </constructor-arg>
+        <constructor-arg index="1" type="java.lang.Integer">
+            <value>12</value>
+        </constructor-arg>
+    </bean>
+
+    <bean id="school_5" class="com.jipf.springframeworkuse.beans.School">
+        <property name="name" value="my school"></property>
+        <property name="address" value="tong zhou"></property>
+        <property name="index" value="1"></property>
+    </bean>
+
+    <bean id="teacher" class="com.jipf.springframeworkuse.beans.Teacher" scope="prototype">
+        <property name="name" value="my teacher"></property>
+    </bean>
+    <bean id="school_6" class="com.jipf.springframeworkuse.beans.School">
+        <constructor-arg>
+            <value>1</value>
+        </constructor-arg>
+        <constructor-arg>
+            <idref bean="teacher"></idref>
+        </constructor-arg>
+    </bean>
+
+    <bean id="school_7" class="com.jipf.springframeworkuse.beans.School">
+        <property name="teacher" ref="teacher"></property>
+    </bean>
+
+    <!-- Qualifier标签测试 -->
+    <!--<bean id="qualifierTest1" class="com.jipf.springframeworkuse.beans.qf.impl.QualifierTest1">-->
+    <!--</bean>-->
+    <!--<bean id="qualifierTest2" class="com.jipf.springframeworkuse.beans.qf.impl.QualifierTest2">-->
+    <!--</bean>-->
+    <!--<bean name="qualifierTest" class="com.jipf.springframeworkuse.beans.qf.QualifierTest" autowire="byType">-->
+        <!--<qualifier type="org.springframework.beans.factory.annotation.Qualifier" value="qualifierTest1"></qualifier>-->
+    <!--</bean>-->
+
+    <!-- lookup-method测试 -->
+    <bean id="qualifierTest1" class="com.jipf.springframeworkuse.beans.qf.impl.QualifierTest1">
+    </bean>
+    <bean id="qualifierTest2" class="com.jipf.springframeworkuse.beans.qf.impl.QualifierTest2">
+    </bean>
+    <bean id="qualifierTest" class="com.jipf.springframeworkuse.beans.qf.QualifierTest">
+        <lookup-method name="getIQualifier" bean="qualifierTest2"></lookup-method>
+    </bean>
 </beans>
