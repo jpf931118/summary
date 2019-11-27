@@ -64,6 +64,7 @@
         </constructor-arg>
     </bean>
 
+    <!-- 测试bean作用域引用 -->
     <bean id="school_7" class="com.jipf.springframeworkuse.beans.School">
         <property name="teacher" ref="teacher"></property>
     </bean>
